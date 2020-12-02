@@ -3,25 +3,23 @@ title             : "The title"
 shorttitle        : "Title"
 
 author: 
-  - name          : "First Author"
+  - name          : "Mathew Ling"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "Postal address"
-    email         : "my@email.com"
+    email         : "m.ling@deakin.edu.au"
     role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
       - Conceptualization
       - Writing - Original Draft Preparation
       - Writing - Review & Editing
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
+  - name          : ""
+    affiliation   : "1"
     role:
       - Writing - Review & Editing
 
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
-  - id            : "2"
-    institution   : "Konstanz Business School"
+    institution   : "Misinformation Lab, School of Psychology, Deakin Univeristy"
 
 authornote: |
   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
@@ -65,6 +63,9 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library("papaja")
+library(tidyverse)
+library(misinformation)
+library(here)
 r_refs("r-references.bib")
 ```
 
@@ -72,6 +73,18 @@ r_refs("r-references.bib")
 # Seed for random number generation
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+```{r data-preparation}
+# Read data ---------------------------------------------------------------
+df <- read_csv(here::here("data", ".csv"))
+meta <- read_csv(here::here("data", ".csv"))
+
+df <-  df %>% meta_rename(meta, old = name_raw, new = name_clean)
+
+# Clean Data --------------------------------------------------------------
+
+
 ```
 
 
